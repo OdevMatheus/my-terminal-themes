@@ -1,31 +1,24 @@
-# Zero Two Oh My Posh Theme
+# Meus Temas de Terminal
 
 🇺🇸 [Read in English](../README.md)
 
-Um tema personalizado para o [Oh My Posh](https://ohmyposh.dev/), inspirado na paleta de cores da personagem Zero Two (Darling in the Franxx) utilizando tons de vermelho e rosa. 
+Uma coleção de temas personalizados e configurações de terminal para [Oh My Posh](https://ohmyposh.dev/), [Fastfetch](https://github.com/fastfetch-cli/fastfetch) e **Windows Terminal**. 
 
-O tema apresenta blocos modernos, Powerline limpo e informações úteis de sistema, horário, git branches/commits e suporte nativo às principais linguagens de programação.
+Este repositório foi criado para ser um centralizador de todos os meus setups de terminal. Ele inclui um script de instalação automatizado para trocar facilmente entre diferentes estéticas.
 
-## Características
+## 🎨 Temas Disponíveis
 
-- **Prompt Esquerdo:**
-  - SO e sessão do usuário (`WSL/Windows`).
-  - Caminho de diretório simplificado (máximo de 3 subpastas).
-  - Status avançado do Git (`HEAD`, *commits*, arquivos em *staging*, *modificados*, *stash* e tracking *upstream*).
-  - Reconhecimento automático do ambiente das seguintes tecnologias: `Java`, `Node`, `Python`, `Go`, `Rust` e `.NET`.
-- **Prompt Direito:**
-  - Tempo de execução dos comandos.
-  - Informações do sistema (uso de RAM em %).
-  - Relógio de tempo real (`HH:MM:SS`).
-- **Input Limpo:** O cursor sempre fica em uma nova linha abaixo, com indicação interativa em caso de erros no terminal (`❯` vermelho).
-- **Windows Terminal:** Inclui um arquivo `settings.json` pré-configurado para a melhor experiência visual.
-- **Fastfetch:** Arte em ASCII pronta (`ascii.txt`) e configurações de estilo (`config.jsonc`).
+| Tema | Descrição | Link |
+| :--- | :--- | :--- |
+| **🌸 Zero Two** | Um tema em tons de rosa e vermelho inspirado em Darling in the Franxx. Inclui blocos de RAM/Tempo e integração completa com Git. | [Ver Tema](../themes/zerotwo/README.md) |
 
-## Instalação
+*(Mais temas serão adicionados aqui no futuro!)*
 
-Você tem duas formas de instalar as configurações: **Automatizada** (usando nosso script) ou **Manual**.
+## 🚀 Instalação
 
-Antes de começar, certifique-se de que você possui instalados:
+Você pode instalar qualquer tema deste repositório usando o script automatizado ou de forma manual.
+
+### Requisitos
 1. [Oh My Posh](https://ohmyposh.dev/docs/installation/windows)
 2. [Fastfetch](https://github.com/fastfetch-cli/fastfetch) (ex: `winget install fastfetch`)
 3. Uma fonte do projeto [Nerd Fonts](https://www.nerdfonts.com/) (ex: `FiraCode Nerd Font` ou `MesloLGM Nerd Font`).
@@ -34,45 +27,28 @@ Antes de começar, certifique-se de que você possui instalados:
 
 ### Opção 1: Instalação Automatizada (Recomendado)
 
-Disponibilizamos um script (`install.ps1`) que copia automaticamente todos os arquivos necessários e **faz backup do seu Windows Terminal settings atual** antes de substituí-lo.
+Disponibilizamos um script (`install.ps1`) que copia automaticamente todos os arquivos necessários do tema escolhido e **faz backup do seu Windows Terminal settings atual** antes de substituí-lo.
 
 1. Abra o PowerShell na pasta raiz do repositório.
 2. Execute o script:
    ```powershell
    .\install.ps1
    ```
-3. Siga o menu interativo para selecionar o tema `zerotwo`.
+3. Siga o menu interativo para selecionar o tema desejado (ex: `1` para o Zero Two).
 4. Reinicie seu terminal ou recarregue seu perfil (`. $PROFILE`).
 
 ---
 
 ### Opção 2: Instalação Manual
 
-Se preferir ter controle total sobre para onde seus arquivos vão, você pode copiar tudo manualmente:
+Se preferir ter controle total, você pode instalar tudo manualmente. Dentro da pasta de cada tema (ex: `themes/zerotwo/`), você encontrará:
 
-#### 1. Oh My Posh
-Mova o arquivo `Zerotwo.omp.json` para uma pasta de sua escolha (ex: `~/.config/oh-my-posh/Zerotwo.omp.json`). Em seguida, edite seu perfil do PowerShell (`notepad $PROFILE`) e adicione a inicialização:
-```powershell
-oh-my-posh init pwsh --config "~/.config/oh-my-posh/Zerotwo.omp.json" | Invoke-Expression
-```
+1. **`*.omp.json`**: Mova para `~/.config/oh-my-posh/` e carregue no seu `$PROFILE` usando `oh-my-posh init pwsh --config "<caminho>" | Invoke-Expression`.
+2. **`config.jsonc` & `ascii.txt`**: Mova para `~/.config/fastfetch/`. Atualize a propriedade `"source"` no arquivo `.jsonc` para apontar para o novo caminho do `ascii.txt`.
+3. **`settings.json`**: Copie para a pasta LocalState do Windows Terminal: `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`. *(Faça backup do original primeiro!)*
 
-#### 2. Fastfetch
-Copie os arquivos da pasta `themes/zerotwo/` para a sua pasta de configurações do Fastfetch (geralmente `~/.config/fastfetch/`):
-- `config.jsonc`
-- `ascii.txt`
+## 🔒 Segurança e Git
 
-*Nota: Certifique-se de que a propriedade `"source"` dentro do `config.jsonc` aponte para o local correto do seu `ascii.txt` (ex: `"~/.config/fastfetch/ascii.txt"`).*
+Todos os arquivos `.omp.json` aqui são seguros para o Git. Eles utilizam propriedades relativas (como `{{ .UserName }}`) e não salvam caminhos específicos do seu computador.
 
-#### 3. Configurações do Windows Terminal
-Para aplicar as cores exatas e o estilo da janela, copie o arquivo `settings.json` presente em `themes/zerotwo/settings.json` e substitua na pasta LocalState do Windows Terminal:
-```text
-%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
-```
-*(Não se esqueça de fazer um backup do seu arquivo original antes de substituir!)*
-
-## Segurança de Dados / Posso subir pro Git?
-
-**O arquivo principal `Zerotwo.omp.json` é 100% seguro para ser subido para o GitHub/Git.** 
-O Oh My Posh renderiza propriedades relativas através de variáveis de ambiente (`{{ .UserName }}`, `{{ .Path }}`), então ele não salva informações sensíveis do seu computador.
-
-Se você modificar o `config.jsonc` ou o `Microsoft.PowerShell_profile.ps1` local com caminhos restritos (ex: `C:/Users/SeuNome/...`), lembre-se de substituí-los por variáveis como `$env:USERPROFILE` ou `~` antes de publicar na internet.
+Se você editar o `config.jsonc` ou o seu perfil do PowerShell, lembre-se de usar caminhos dinâmicos como `~` ou `$env:USERPROFILE` em vez de fixar `C:/Users/SeuNome/...`.
