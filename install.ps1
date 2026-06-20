@@ -32,6 +32,7 @@ $ThemesRoot    = Join-Path $RepoRoot "themes"
 $PoshDestDir   = "$env:USERPROFILE\.config\oh-my-posh"
 $FastfetchDir  = "$env:USERPROFILE\.config\fastfetch"
 $ProfileDest   = "$env:USERPROFILE\OneDrive\Documentos\PowerShell\Microsoft.PowerShell_profile.ps1"
+$WtSettingsDest = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 
 function Write-Step($msg) {
     Write-Host "→ $msg" -ForegroundColor Cyan
@@ -68,18 +69,25 @@ function Get-ThemeFiles {
     $configFile = Join-Path $ThemeDir "config.jsonc"
     $asciiFile  = Join-Path $ThemeDir "ascii.txt"
     $profileFile = Join-Path $ThemeDir "Microsoft.PowerShell_profile.ps1"
+    $wtSettingsFile = Join-Path $ThemeDir "settings.json"
 
     foreach ($f in @($configFile, $asciiFile, $profileFile)) {
         if (-not (Test-Path $f)) { throw "Arquivo nao encontrado: $f" }
     }
     if (-not $ompFile) { throw "Nenhum arquivo *.omp.json encontrado em $ThemeDir" }
 
-    return @{
+    $result = @{
         Omp     = $ompFile.FullName
         Config  = $configFile
         Ascii   = $asciiFile
         Profile = $profileFile
     }
+
+    if (Test-Path $wtSettingsFile) {
+        $result.WtSettings = $wtSettingsFile
+    }
+
+    return $result
 }
 
 function Install-Theme {
@@ -105,6 +113,17 @@ function Install-Theme {
     Write-Host "    $configDest"
     Write-Host "    $asciiDest"
     Write-Host "    $ProfileDest"
+
+    if ($Files.WtSettings) {
+        if (Test-Path $WtSettingsDest) {
+            $backupPath = "$WtSettingsDest.bak"
+            Copy-Item -Path $WtSettingsDest -Destination $backupPath -Force
+            Write-Host "    Backup do Windows Terminal settings criado em: $backupPath" -ForegroundColor DarkGray
+        }
+        New-Item -ItemType Directory -Force -Path (Split-Path $WtSettingsDest) | Out-Null
+        Copy-Item -Path $Files.WtSettings -Destination $WtSettingsDest -Force
+        Write-Host "    $WtSettingsDest"
+    }
 
     return @{ Omp = $ompDest; Config = $configDest; Ascii = $asciiDest }
 }
