@@ -45,6 +45,16 @@ This theme is a high-performance, professional terminal prompt utilizing the fou
 
 ---
 
+## 📸 Previews / Visualização
+
+### Windows Terminal (PowerShell)
+![Terminal Preview](IMGS/terminal.png)
+
+### IntelliJ IDEA Terminal (PowerShell)
+![IntelliJ Preview](IMGS/intellij.png)
+
+---
+
 ## 🚀 Installation / Instalação
 
 ### English (Recommended)
