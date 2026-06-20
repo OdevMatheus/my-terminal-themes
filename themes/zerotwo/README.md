@@ -17,6 +17,8 @@ A custom theme for [Oh My Posh](https://ohmyposh.dev/), inspired by the color pa
 - **Windows Terminal Settings:** Includes a pre-configured `settings.json` file for the best visual experience.
 - **Fastfetch Support:** Ready-to-use ASCII art (`ascii.txt`) and styling configurations (`config.jsonc`).
 
+![img.png](IMGS/img.png)
+
 ## Como instalar / How to install
 
 Refer to the main repository [README](../../README.md) for automated and manual installation instructions.
