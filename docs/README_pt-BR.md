@@ -18,39 +18,61 @@ O tema apresenta blocos modernos, Powerline limpo e informações úteis de sist
   - Informações do sistema (uso de RAM em %).
   - Relógio de tempo real (`HH:MM:SS`).
 - **Input Limpo:** O cursor sempre fica em uma nova linha abaixo, com indicação interativa em caso de erros no terminal (`❯` vermelho).
+- **Windows Terminal:** Inclui um arquivo `settings.json` pré-configurado para a melhor experiência visual.
+- **Fastfetch:** Arte em ASCII pronta (`ascii.txt`) e configurações de estilo (`config.jsonc`).
+
+## Instalação
+
+Você tem duas formas de instalar as configurações: **Automatizada** (usando nosso script) ou **Manual**.
+
+Antes de começar, certifique-se de que você possui instalados:
+1. [Oh My Posh](https://ohmyposh.dev/docs/installation/windows)
+2. [Fastfetch](https://github.com/fastfetch-cli/fastfetch) (ex: `winget install fastfetch`)
+3. Uma fonte do projeto [Nerd Fonts](https://www.nerdfonts.com/) (ex: `FiraCode Nerd Font` ou `MesloLGM Nerd Font`).
+
+---
+
+### Opção 1: Instalação Automatizada (Recomendado)
+
+Disponibilizamos um script (`install.ps1`) que copia automaticamente todos os arquivos necessários e **faz backup do seu Windows Terminal settings atual** antes de substituí-lo.
+
+1. Abra o PowerShell na pasta raiz do repositório.
+2. Execute o script:
+   ```powershell
+   .\install.ps1
+   ```
+3. Siga o menu interativo para selecionar o tema `zerotwo`.
+4. Reinicie seu terminal ou recarregue seu perfil (`. $PROFILE`).
+
+---
+
+### Opção 2: Instalação Manual
+
+Se preferir ter controle total sobre para onde seus arquivos vão, você pode copiar tudo manualmente:
+
+#### 1. Oh My Posh
+Mova o arquivo `Zerotwo.omp.json` para uma pasta de sua escolha (ex: `~/.config/oh-my-posh/Zerotwo.omp.json`). Em seguida, edite seu perfil do PowerShell (`notepad $PROFILE`) e adicione a inicialização:
+```powershell
+oh-my-posh init pwsh --config "~/.config/oh-my-posh/Zerotwo.omp.json" | Invoke-Expression
+```
+
+#### 2. Fastfetch
+Copie os arquivos da pasta `themes/zerotwo/` para a sua pasta de configurações do Fastfetch (geralmente `~/.config/fastfetch/`):
+- `config.jsonc`
+- `ascii.txt`
+
+*Nota: Certifique-se de que a propriedade `"source"` dentro do `config.jsonc` aponte para o local correto do seu `ascii.txt` (ex: `"~/.config/fastfetch/ascii.txt"`).*
+
+#### 3. Configurações do Windows Terminal
+Para aplicar as cores exatas e o estilo da janela, copie o arquivo `settings.json` presente em `themes/zerotwo/settings.json` e substitua na pasta LocalState do Windows Terminal:
+```text
+%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
+```
+*(Não se esqueça de fazer um backup do seu arquivo original antes de substituir!)*
 
 ## Segurança de Dados / Posso subir pro Git?
 
-**O arquivo `Zerotwo.omp.json` principal (na raiz) é 100% seguro para ser subido para o GitHub/Git.** 
-O Oh My Posh renderiza propriedades relativas através de variáveis de ambiente (`{{ .UserName }}`, `{{ .Path }}`), então ele não salva informações sensíveis, chaves ou caminhos de diretório estáticos do seu computador.
+**O arquivo principal `Zerotwo.omp.json` é 100% seguro para ser subido para o GitHub/Git.** 
+O Oh My Posh renderiza propriedades relativas através de variáveis de ambiente (`{{ .UserName }}`, `{{ .Path }}`), então ele não salva informações sensíveis do seu computador.
 
-**Atenção aos arquivos gerados em sua pasta `.config` e `.profile`!** 
-O projeto possui alguns arquivos da pasta `themes/zerotwo/` como o `config.jsonc` (do fastfetch) ou o seu `Microsoft.PowerShell_profile.ps1` que possuem o caminho restrito da sua máquina (ex: `C:/Users/Mathe/...`). Caso queira distribuir isso em um repositório git público, lembre-se de usar variáveis como `$env:USERPROFILE` no script ou orientar o usuário a substituir no JSON do Fastfetch. 
-
-## Como Instalar e Configurar na Sua Máquina
-
-1. Certifique-se de que o **Oh My Posh** está instalado. Veja como na [documentação oficial](https://ohmyposh.dev/docs/installation/windows).
-2. Para que os ícones do Git e linguagens apareçam corretamente, utilize uma fonte do projeto [Nerd Fonts](https://www.nerdfonts.com/) em seu Terminal (ex: `FiraCode Nerd Font`, `MesloLGM Nerd Font`).
-
-### Configurando o arquivo do Oh My Posh
-Mova ou faça uma cópia do arquivo `Zerotwo.omp.json` para uma pasta de temas em seu PC ou aponte seu arquivo de perfil diretamente para o repositório.
-
-Abra o seu perfil do powershell:
-```powershell
-notepad $PROFILE
-```
-
-E substitua ou adicione a linha de inicialização, trocando `C:/caminho/para/` pela localização correta do seu arquivo:
-```powershell
-oh-my-posh init pwsh --config "C:/caminho/para/Zerotwo.omp.json" | Invoke-Expression
-```
-
-### Removendo Dependência do Nome de Usuário de Perfis Anteriores 
-Se em outros arquivos do seu perfil do Terminal/PowerShell houveram modificações estáticas para chamar scripts no caminho de `C:/Users/Mathe`, basta alterá-los para torná-los universais (dinâmicos para qualquer pc):
-
-- No seu **Perfil do PowerShell**:
-  Troque `C:/Users/Mathe/.config/fastfetch/config.jsonc` para:
-  `$env:USERPROFILE/.config/fastfetch/config.jsonc`
-- No **config.jsonc** (Fastfetch):
-  Apesar do Fastfetch utilizar caminhos absolutos, você pode usar um til `~` que no bash ou powershell mais recente fará referência à *home*:
-  `"source": "~/.config/fastfetch/ascii.txt"`
+Se você modificar o `config.jsonc` ou o `Microsoft.PowerShell_profile.ps1` local com caminhos restritos (ex: `C:/Users/SeuNome/...`), lembre-se de substituí-los por variáveis como `$env:USERPROFILE` ou `~` antes de publicar na internet.
