@@ -4,11 +4,9 @@
 
 .DESCRIPTION
     Lista os temas disponiveis na pasta "themes\", deixa voce escolher um
-    (ou recebe via parametro), e copia os arquivos para os locais corretos:
-      - <Tema>.omp.json    -> ~/.config/oh-my-posh/<tema>.omp.json
-      - config.jsonc       -> ~/.config/fastfetch/config.jsonc
-      - ascii.txt          -> ~/.config/fastfetch/ascii.txt
-      - Microsoft.PowerShell_profile.ps1 -> seu $PROFILE real (OneDrive)
+    (ou recebe via parametro), e copia os arquivos para os locais corretos.
+    O unico arquivo obrigatorio de cada tema e o arquivo do Oh My Posh (*.omp.json).
+    Os demais arquivos (config.jsonc, ascii.txt, Microsoft.PowerShell_profile.ps1, settings.json) sao opcionais.
 
 .EXAMPLE
     .\install.ps1
@@ -66,26 +64,23 @@ function Get-ThemeFiles {
     param([string]$ThemeDir)
 
     $ompFile = Get-ChildItem -Path $ThemeDir -Filter "*.omp.json" | Select-Object -First 1
-    $configFile = Join-Path $ThemeDir "config.jsonc"
-    $asciiFile  = Join-Path $ThemeDir "ascii.txt"
-    $profileFile = Join-Path $ThemeDir "Microsoft.PowerShell_profile.ps1"
-    $wtSettingsFile = Join-Path $ThemeDir "settings.json"
-
-    foreach ($f in @($configFile, $asciiFile, $profileFile)) {
-        if (-not (Test-Path $f)) { throw "Arquivo nao encontrado: $f" }
-    }
     if (-not $ompFile) { throw "Nenhum arquivo *.omp.json encontrado em $ThemeDir" }
 
     $result = @{
-        Omp     = $ompFile.FullName
-        Config  = $configFile
-        Ascii   = $asciiFile
-        Profile = $profileFile
+        Omp = $ompFile.FullName
     }
 
-    if (Test-Path $wtSettingsFile) {
-        $result.WtSettings = $wtSettingsFile
-    }
+    $configFile = Join-Path $ThemeDir "config.jsonc"
+    if (Test-Path $configFile) { $result.Config = $configFile }
+
+    $asciiFile = Join-Path $ThemeDir "ascii.txt"
+    if (Test-Path $asciiFile) { $result.Ascii = $asciiFile }
+
+    $profileFile = Join-Path $ThemeDir "Microsoft.PowerShell_profile.ps1"
+    if (Test-Path $profileFile) { $result.Profile = $profileFile }
+
+    $wtSettingsFile = Join-Path $ThemeDir "settings.json"
+    if (Test-Path $wtSettingsFile) { $result.WtSettings = $wtSettingsFile }
 
     return $result
 }
@@ -94,25 +89,37 @@ function Install-Theme {
     param([string]$ThemeName, [hashtable]$Files)
 
     Write-Step "Criando diretorios de destino..."
-    New-Item -ItemType Directory -Force -Path $PoshDestDir  | Out-Null
-    New-Item -ItemType Directory -Force -Path $FastfetchDir | Out-Null
-    New-Item -ItemType Directory -Force -Path (Split-Path $ProfileDest) | Out-Null
+    New-Item -ItemType Directory -Force -Path $PoshDestDir | Out-Null
 
-    $ompDest    = Join-Path $PoshDestDir "$ThemeName.omp.json"
-    $configDest = Join-Path $FastfetchDir "config.jsonc"
-    $asciiDest  = Join-Path $FastfetchDir "ascii.txt"
+    $ompDest = Join-Path $PoshDestDir "$ThemeName.omp.json"
+    Write-Step "Copiando arquivo do prompt..."
+    Copy-Item -Path $Files.Omp -Destination $ompDest -Force
+    Write-Host "  OK: $ompDest" -ForegroundColor Green
 
-    Write-Step "Copiando arquivos..."
-    Copy-Item -Path $Files.Omp     -Destination $ompDest    -Force
-    Copy-Item -Path $Files.Config  -Destination $configDest -Force
-    Copy-Item -Path $Files.Ascii   -Destination $asciiDest  -Force
-    Copy-Item -Path $Files.Profile -Destination $ProfileDest -Force
+    $installed = @{ Omp = $ompDest }
 
-    Write-Host "  OK:" -ForegroundColor Green
-    Write-Host "    $ompDest"
-    Write-Host "    $configDest"
-    Write-Host "    $asciiDest"
-    Write-Host "    $ProfileDest"
+    if ($Files.Config) {
+        New-Item -ItemType Directory -Force -Path $FastfetchDir | Out-Null
+        $configDest = Join-Path $FastfetchDir "config.jsonc"
+        Copy-Item -Path $Files.Config -Destination $configDest -Force
+        Write-Host "  OK: $configDest" -ForegroundColor Green
+        $installed.Config = $configDest
+    }
+
+    if ($Files.Ascii) {
+        New-Item -ItemType Directory -Force -Path $FastfetchDir | Out-Null
+        $asciiDest = Join-Path $FastfetchDir "ascii.txt"
+        Copy-Item -Path $Files.Ascii -Destination $asciiDest -Force
+        Write-Host "  OK: $asciiDest" -ForegroundColor Green
+        $installed.Ascii = $asciiDest
+    }
+
+    if ($Files.Profile) {
+        New-Item -ItemType Directory -Force -Path (Split-Path $ProfileDest) | Out-Null
+        Copy-Item -Path $Files.Profile -Destination $ProfileDest -Force
+        Write-Host "  OK: $ProfileDest" -ForegroundColor Green
+        $installed.Profile = $ProfileDest
+    }
 
     if ($Files.WtSettings) {
         if (Test-Path $WtSettingsDest) {
@@ -122,10 +129,10 @@ function Install-Theme {
         }
         New-Item -ItemType Directory -Force -Path (Split-Path $WtSettingsDest) | Out-Null
         Copy-Item -Path $Files.WtSettings -Destination $WtSettingsDest -Force
-        Write-Host "    $WtSettingsDest"
+        Write-Host "    $WtSettingsDest" -ForegroundColor Green
     }
 
-    return @{ Omp = $ompDest; Config = $configDest; Ascii = $asciiDest }
+    return $installed
 }
 
 function Update-FastfetchSourcePath {
@@ -182,8 +189,15 @@ Write-Step "Tema selecionado: $ThemeName"
 $themeDir = Join-Path $ThemesRoot $ThemeName
 $files = Get-ThemeFiles -ThemeDir $themeDir
 $installed = Install-Theme -ThemeName $ThemeName -Files $files
-Update-FastfetchSourcePath -ConfigDest $installed.Config -AsciiDest $installed.Ascii
-Update-ProfileOmpPath -OmpDest $installed.Omp
+
+if ($installed.Config -and $installed.Ascii) {
+    Update-FastfetchSourcePath -ConfigDest $installed.Config -AsciiDest $installed.Ascii
+}
+
+if ($installed.Profile) {
+    Update-ProfileOmpPath -OmpDest $installed.Omp
+}
+
 Test-Dependencies
 
 Write-Host "`n=== Concluido ===" -ForegroundColor Magenta

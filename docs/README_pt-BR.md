@@ -25,6 +25,7 @@ Para garantir uma instalação simples e descomplicada, o projeto inclui um scri
 | Tema | Descrição | Detalhes & Visualização |
 |:---|:---|:---|
 | **🌸 Zero Two** | Um tema marcante em tons de rosa e vermelho inspirado no anime *Darling in the Franxx*. Integra estatísticas de RAM em tempo real e suporte multilíngue. | [Ver Tema](../themes/zerotwo/README.md) |
+| **❖ Windows** | Um tema de terminal altamente polido e premium inspirado nas cores clássicas e vibrantes da logo corporativa do Windows/Microsoft. | [Ver Tema](../themes/windows/README.md) |
 
 ---
 

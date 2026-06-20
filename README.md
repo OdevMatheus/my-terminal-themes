@@ -25,6 +25,7 @@ To ensure seamless installation, it includes an interactive PowerShell script to
 | Theme | Description | Details & Preview |
 |:---|:---|:---|
 | **🌸 Zero Two** | A striking pink and red terminal theme inspired by *Darling in the Franxx*. Integrates real-time system resource stats and multi-language support. | [View Theme](themes/zerotwo/README.md) |
+| **❖ Windows** | A highly polished, premium terminal theme inspired by the classic and vibrant corporate colors of the Windows/Microsoft logo. | [View Theme](themes/windows/README.md) |
 
 ---
 
