@@ -1,8 +1,8 @@
 <div align="center">
 
-# My Terminal Themes
+# 🛠️ My Terminal Themes
 
-A curated collection of highly aesthetic custom terminal themes and configurations for **Windows Terminal**, **Oh My Posh**, and **Fastfetch**.
+A curated collection of highly aesthetic, premium terminal themes and configurations for **Windows Terminal**, **Oh My Posh**, and **Fastfetch**.
 
 [![Stars](https://img.shields.io/github/stars/OdevMatheus/my-terminal-themes?style=for-the-badge)](https://github.com/OdevMatheus/my-terminal-themes/stargazers)
 [![Platform](https://img.shields.io/badge/Platform-Windows-0078D4?style=for-the-badge&logo=windows&logoColor=white)](https://www.microsoft.com/windows)
@@ -14,116 +14,94 @@ A curated collection of highly aesthetic custom terminal themes and configuratio
 
 ---
 
-## What is this?
+## 📖 What is this?
 
-This repository serves as a centralized hub for all my custom terminal setups and configurations. It features customized powerlines, interactive elements, detailed system status monitors, and dynamic environment tracking. 
+This repository is an all-in-one hub for modern terminal aesthetics. It provides everything you need to transform your standard PowerShell and Windows Terminal into an elite development environment.
 
-To ensure seamless installation, it includes an interactive PowerShell script to safely install, update, and switch themes while automatically backing up your existing configurations.
+Instead of spending hours tweaking JSON configurations, you can use the **intelligent interactive installer** to set up, upgrade, or switch themes in seconds—complete with automated, safe backups of your existing setups.
 
-## 🎨 Available Themes
+### ✨ Highlights
 
-| Theme | Description | Details & Preview |
-|:---|:---|:---|
-| **🌸 Zero Two** | A striking pink and red terminal theme inspired by *Darling in the Franxx*. Integrates real-time system resource stats and multi-language support. | [View Theme](themes/zerotwo/README.md) |
-| **❖ Windows** | A highly polished, premium terminal theme inspired by the classic and vibrant corporate colors of the Windows/Microsoft logo. | [View Theme](themes/windows/README.md) |
+- **Automated Setup:** Run one command (`.\install.ps1`) to copy configurations, adjust absolute paths, and wire up PowerShell.
+- **Safety Backups:** The installer automatically backs up your original Windows Terminal `settings.json` before applying theme styles.
+- **Dynamic & Safe Pathing:** Built from the ground up using dynamic variables (`{{ .UserName }}`) and relative paths, preventing leak of personal system directories.
+- **Modular Themes:** Every theme includes Oh My Posh prompts, Fastfetch system configs, custom ASCII art, and Windows Terminal color schemes.
 
 ---
 
-## 🚀 Quick Start
+## 🎨 Available Themes
 
-Get your new terminal set up and running in under 60 seconds.
+| Theme | Preview / Description | Details & Preview |
+|:---|:---|:---|
+| **🌸 Zero Two** | Ultra-aesthetic pink & red styling inspired by *Darling in the Franxx*. Includes live RAM monitors, execution timers, and exclusive ASCII art. | [View Theme & Screenshots](themes/zerotwo/README.md) |
+| **❖ Windows** | Highly polished premium theme utilizing the vibrant classic Microsoft palette. Perfect contrast, modern powerline layouts, and resource tracking. | [View Theme & Screenshots](themes/windows/README.md) |
+
+---
+
+## 🚀 Quick Start (60 Seconds)
 
 ### 📋 Prerequisites
 
-Before running the installer, ensure you have the following installed:
+Ensure you have these tools installed before running the installer:
 
-1. **[Oh My Posh](https://ohmyposh.dev/docs/installation/windows)** — The prompt engine.
-2. **[Fastfetch](https://github.com/fastfetch-cli/fastfetch)** — System information tool (`winget install fastfetch`).
-3. **[Nerd Fonts](https://www.nerdfonts.com/)** — A patched font is required for icons (e.g., *FiraCode Nerd Font* or *MesloLGM Nerd Font*).
+1. **[Oh My Posh](https://ohmyposh.dev/docs/installation/windows)** (Prompt engine)
+2. **[Fastfetch](https://github.com/fastfetch-cli/fastfetch)** (System information) — `winget install fastfetch`
+3. **[Nerd Fonts](https://www.nerdfonts.com/)** (Icon rendering) — e.g., *FiraCode Nerd Font* or *MesloLGM Nerd Font*
 
-### 🛠️ Automated Installation (Recommended)
+### 🛠️ Interactive Installation
 
-The automated script configures everything, loads the chosen theme, and **safely backs up your existing Windows Terminal settings** before making any changes.
-
-1. Clone this repository and navigate to its root folder:
+1. Clone the repository and enter the directory:
    ```powershell
    git clone https://github.com/OdevMatheus/my-terminal-themes.git
    cd my-terminal-themes
    ```
 
-2. Run the interactive installer script:
+2. Run the installer script:
    ```powershell
    .\install.ps1
    ```
 
-3. Follow the interactive menu to select your theme (e.g., enter `1` for Zero Two).
-4. Restart your terminal or reload your PowerShell profile:
+3. Choose your theme from the interactive menu, then restart your terminal or reload your profile:
    ```powershell
    . $PROFILE
    ```
 
 ---
 
-## ⚙️ Manual Installation
+## ⚙️ Manual Installation (Advanced)
 
-If you prefer full manual control, each theme directory contains the necessary source files. To install manually:
+If you prefer full manual control, apply the assets from your desired theme's directory:
 
 1. **Oh My Posh Prompt (`*.omp.json`)**
-   - Copy the theme file to your configuration directory (usually `~/.config/oh-my-posh/`).
-   - Initialize it in your PowerShell profile (`$PROFILE`):
+   - Copy to your configuration directory (usually `~/.config/oh-my-posh/`).
+   - Load it in your PowerShell profile (`$PROFILE`):
      ```powershell
-     oh-my-posh init pwsh --config "~/.config/oh-my-posh/Zerotwo.omp.json" | Invoke-Expression
+     oh-my-posh init pwsh --config "~/.config/oh-my-posh/ThemeName.omp.json" | Invoke-Expression
      ```
 
 2. **Fastfetch (`config.jsonc` & `ascii.txt`)**
-   - Copy both files to `~/.config/fastfetch/`.
-   - Open your `config.jsonc` and update the `"source"` path for the ASCII logo to point to your local `ascii.txt` location.
+   - Copy to `~/.config/fastfetch/`.
+   - Update the `"source"` field in `config.jsonc` to point to the absolute path of your local `ascii.txt` (remember to escape backslashes on Windows as `\\`).
 
-3. **Windows Terminal Styles (`settings.json`)**
-   - Backup your current settings first!
-   - Copy or merge the styling properties from `settings.json` into your local Windows Terminal configuration: `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`.
-
----
-
-## 🔒 Security & Git Integration
-
-This repository follows strict safety guidelines for terminal sharing:
-- All `.omp.json` profiles utilize relative variables (e.g., `{{ .UserName }}`) to avoid hardcoding username details or internal paths.
-- If you customize any configurations locally, ensure you use dynamic environment tags like `~` or `$env:USERPROFILE` before committing or sharing them.
+3. **Windows Terminal (`settings.json`)**
+   - Merge the visual profiles and color schemes into your local Windows Terminal configuration: `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`.
 
 ---
 
-## 📂 Project Structure
+## 🔒 Security & Peace of Mind
 
-```
-docs/
-  README_pt-BR.md
-themes/
-  zerotwo/
-    IMGS/
-      intellij.png
-      terminal.png
-    ascii.txt
-    config.jsonc
-    Microsoft.PowerShell_profile.ps1
-    README.md
-    settings.json
-    Zerotwo.omp.json
-.gitignore
-install.ps1
-README.md
-```
+No hardcoded home paths (`C:/Users/name`). All configurations use dynamic system environment variables. This keeps your local paths hidden, making your configuration completely safe to use, fork, and share on Git.
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! If you have a theme you'd like to share, or improvements to the installer script:
+Contributions are welcome! If you have built an awesome theme or want to improve the installer script:
 
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b theme/your-theme-name`).
-3. Commit your changes safely (do not commit hardcoded personal credentials or local absolute paths).
-4. Push to the branch and open a Pull Request.
+1. Fork this repository.
+2. Create your theme branch (`git checkout -b theme/your-theme-name`).
+3. Commit your changes (keep paths generic/dynamic).
+4. Open a Pull Request.
 
 <a href="https://github.com/OdevMatheus/my-terminal-themes/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=OdevMatheus/my-terminal-themes" />
@@ -131,8 +109,6 @@ Contributions are welcome! If you have a theme you'd like to share, or improveme
 
 ---
 
-## License
+## 📜 License
 
-This project is open-source and free to use. Refer to individual theme configurations for external asset licenses where applicable.
-
----
+This project is open-source and free to use. Refer to individual theme configurations for external asset details and credits.
