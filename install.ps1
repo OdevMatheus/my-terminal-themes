@@ -40,7 +40,7 @@ function Get-AvailableThemes {
     if (-not (Test-Path $ThemesRoot)) {
         throw "Pasta de temas nao encontrada: $ThemesRoot"
     }
-    Get-ChildItem -Path $ThemesRoot -Directory | Select-Object -ExpandProperty Name
+    Get-ChildItem -Path $ThemesRoot -Filter "*.omp.json" -Recurse | ForEach-Object { $_.Directory.Name } | Select-Object -Unique
 }
 
 function Select-ThemeInteractive {
@@ -186,7 +186,10 @@ if (-not $ThemeName) {
 
 Write-Step "Tema selecionado: $ThemeName"
 
-$themeDir = Join-Path $ThemesRoot $ThemeName
+$themeDir = Get-ChildItem -Path $ThemesRoot -Recurse -Directory -Filter $ThemeName | Select-Object -ExpandProperty FullName -First 1
+if (-not $themeDir) {
+    throw "Nao foi possivel encontrar a pasta do tema '$ThemeName'"
+}
 $files = Get-ThemeFiles -ThemeDir $themeDir
 $installed = Install-Theme -ThemeName $ThemeName -Files $files
 
