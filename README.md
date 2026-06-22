@@ -33,8 +33,9 @@ Instead of spending hours tweaking JSON configurations, you can use the **intell
 
 | Theme | Preview / Description | Details & Preview |
 |:---|:---|:---|
-| **🌸 Zero Two** | Ultra-aesthetic pink & red styling inspired by *Darling in the Franxx*. Includes live RAM monitors, execution timers, and exclusive ASCII art. | [View Theme & Screenshots](themes/zerotwo/README.md) |
-| **❖ Windows** | Highly polished premium theme utilizing the vibrant classic Microsoft palette. Perfect contrast, modern powerline layouts, and resource tracking. | [View Theme & Screenshots](themes/windows/README.md) |
+| **🌸 Zero Two** | Ultra-aesthetic pink & red styling inspired by *Darling in the Franxx*. Includes live RAM monitors, execution timers, and exclusive ASCII art. | [View Theme & Screenshots](themes/ANIMES/zerotwo/README.md) |
+| **🐦‍⬛ Itachi** | Ultra-aesthetic, premium crimson & black styling inspired by *Naruto*. Features retro line-borders, custom Sharingan eye input cursor, and legendary crow ASCII art. | [View Theme & Screenshots](themes/ANIMES/itachi/README.md) |
+| **❖ Windows** | Highly polished premium theme utilizing the vibrant classic Microsoft palette. Perfect contrast, modern powerline layouts, and resource tracking. | [View Theme & Screenshots](themes/OS/windows/README.md) |
 
 ---
 
