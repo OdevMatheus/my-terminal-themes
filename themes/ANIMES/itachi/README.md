@@ -46,10 +46,10 @@ This theme is a high-performance, visually striking terminal configuration custo
 ## 📸 Previews / Visualização
 
 ### Windows Terminal (PowerShell)
-![Terminal Preview](themes/ANIMES/itachi/IMGS/terminal.png)
+![Terminal Preview](IMGS/terminal.png)
 
 ### IntelliJ IDEA Terminal (PowerShell)
-![IntelliJ Preview](themes/ANIMES/itachi/IMGS/intellij.png)
+![IntelliJ Preview](IMGS/intellij.png)
 
 ---
 
