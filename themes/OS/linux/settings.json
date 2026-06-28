@@ -1,0 +1,128 @@
+{
+  "$help": "https://aka.ms/terminal-documentation",
+  "$schema": "https://aka.ms/terminal-profiles-schema",
+  "actions": [
+    {
+      "command": {
+        "action": "copy",
+        "singleLine": false
+      },
+      "id": "User.copy.644BA8F2"
+    },
+    {
+      "command": "paste",
+      "id": "User.paste"
+    },
+    {
+      "command": "find",
+      "id": "User.find"
+    },
+    {
+      "command": {
+        "action": "splitPane",
+        "split": "auto",
+        "splitMode": "duplicate"
+      },
+      "id": "User.splitPane.A6751878"
+    }
+  ],
+  "alwaysOnTop": false,
+  "copyFormatting": "none",
+  "copyOnSelect": false,
+  "defaultProfile": "{31e7a814-b4b1-4bef-9b24-30c0ef99a7c9}",
+  "keybindings": [
+    {
+      "id": "User.copy.644BA8F2",
+      "keys": "ctrl+c"
+    },
+    {
+      "id": "User.find",
+      "keys": "ctrl+shift+f"
+    },
+    {
+      "id": "User.paste",
+      "keys": "ctrl+v"
+    },
+    {
+      "id": "User.splitPane.A6751878",
+      "keys": "alt+shift+d"
+    }
+  ],
+  "newTabMenu": [
+    {
+      "type": "remainingProfiles"
+    }
+  ],
+  "profiles": {
+    "defaults": {
+      "colorScheme": "Ubuntu Dark",
+      "cursorShape": "filledBox",
+      "experimental.retroTerminalEffect": false,
+      "font": {
+        "builtinGlyphs": true,
+        "cellHeight": "1.2",
+        "colorGlyphs": true,
+        "face": "JetBrainsMonoNL Nerd Font",
+        "size": 10,
+        "weight": "medium"
+      },
+      "intenseTextStyle": "all",
+      "opacity": 90,
+      "padding": "12",
+      "useAcrylic": true
+    },
+    "list": [
+      {
+        "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoLogo",
+        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+        "hidden": false,
+        "name": "Windows PowerShell"
+      },
+      {
+        "colorScheme": "Ubuntu",
+        "commandline": "%SystemRoot%\\System32\\cmd.exe",
+        "cursorColor": "#DC322F",
+        "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+        "hidden": false,
+        "name": "Command Prompt"
+      },
+      {
+        "guid": "{31e7a814-b4b1-4bef-9b24-30c0ef99a7c9}",
+        "hidden": false,
+        "name": "LINUX-Tux-Session",
+        "commandline": "powershell.exe -NoLogo",
+        "opacity": 90,
+        "useAcrylic": true,
+        "startingDirectory": "%USERPROFILE%"
+      }
+    ]
+  },
+  "schemes": [
+    {
+      "name": "Ubuntu Dark",
+      "background": "#300A24",
+      "foreground": "#FFFFFF",
+      "cursorColor": "#DFDBCE",
+      "selectionBackground": "#E95420",
+      "black": "#2E3436",
+      "brightBlack": "#555753",
+      "blue": "#3465A4",
+      "brightBlue": "#729FCF",
+      "cyan": "#06989A",
+      "brightCyan": "#34E2E2",
+      "green": "#4E9A06",
+      "brightGreen": "#8AE234",
+      "purple": "#75507B",
+      "brightPurple": "#AD7FA8",
+      "red": "#CC0000",
+      "brightRed": "#EF2929",
+      "white": "#D3D7CF",
+      "brightWhite": "#EEEEEC",
+      "yellow": "#C4A000",
+      "brightYellow": "#FCE94F"
+    }
+  ],
+  "tabWidthMode": "titleLength",
+  "themes": [],
+  "useAcrylicInTabRow": true
+}
