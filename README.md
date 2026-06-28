@@ -23,8 +23,10 @@ Instead of spending hours tweaking JSON configurations, you can use the **intell
 ### ✨ Highlights
 
 - **Automated Setup:** Run one command (`.\install.ps1`) to copy configurations, adjust absolute paths, and wire up PowerShell.
-- **Safety Backups:** The installer automatically backs up your original Windows Terminal `settings.json` before applying theme styles.
-- **Dynamic & Safe Pathing:** Built from the ground up using dynamic variables (`{{ .UserName }}`) and relative paths, preventing leak of personal system directories.
+- **Dual Profile Support:** The installer automatically detects and configures both **Windows PowerShell (v5.1)** and **PowerShell Core (v7+)** profiles concurrently.
+- **Dynamic Documents Pathing:** No hardcoded usernames or OneDrive paths. The installer dynamically resolves the active Documents directory across OneDrive redirections and multilingual systems.
+- **Safety Backups:** Automatically backs up your original Windows Terminal `settings.json` before applying theme styles.
+- **100% Machine Portable:** Zero hardcoded paths (`C:/Users/name`) or fragile version-locked paths (`WindowsApps`). Fully compatible out-of-the-box on any Windows machine.
 - **Modular Themes:** Every theme includes Oh My Posh prompts, Fastfetch system configs, custom ASCII art, and Windows Terminal color schemes.
 
 ---
@@ -33,6 +35,7 @@ Instead of spending hours tweaking JSON configurations, you can use the **intell
 
 | Theme | Preview / Description | Details & Preview |
 |:---|:---|:---|
+| **✨ Clean Stars** | Premium, ultra-minimalist gray theme featuring spacious floating-pill prompts, custom 3D geometric wireframe ASCII art, horizontal dividers, and a tidy layout. | [View Theme & Screenshots](themes/MINIMAL/cleanstars/README.md) |
 | **🌸 Zero Two** | Ultra-aesthetic pink & red styling inspired by *Darling in the Franxx*. Includes live RAM monitors, execution timers, and exclusive ASCII art. | [View Theme & Screenshots](themes/ANIMES/zerotwo/README.md) |
 | **🐦‍⬛ Itachi** | Ultra-aesthetic, premium crimson & black styling inspired by *Naruto*. Features retro line-borders, custom Sharingan eye input cursor, and legendary crow ASCII art. | [View Theme & Screenshots](themes/ANIMES/itachi/README.md) |
 | **❖ Windows** | Highly polished premium theme utilizing the vibrant classic Microsoft palette. Perfect contrast, modern powerline layouts, and resource tracking. | [View Theme & Screenshots](themes/OS/windows/README.md) |
@@ -47,7 +50,7 @@ Ensure you have these tools installed before running the installer:
 
 1. **[Oh My Posh](https://ohmyposh.dev/docs/installation/windows)** (Prompt engine)
 2. **[Fastfetch](https://github.com/fastfetch-cli/fastfetch)** (System information) — `winget install fastfetch`
-3. **[Nerd Fonts](https://www.nerdfonts.com/)** (Icon rendering) — e.g., *FiraCode Nerd Font* or *MesloLGM Nerd Font*
+3. **[Nerd Fonts](https://www.nerdfonts.com/)** (Icon rendering) — e.g., *JetBrainsMono Nerd Font* or *FiraCode Nerd Font*
 
 ### 🛠️ Interactive Installation
 
@@ -91,7 +94,7 @@ If you prefer full manual control, apply the assets from your desired theme's di
 
 ## 🔒 Security & Peace of Mind
 
-No hardcoded home paths (`C:/Users/name`). All configurations use dynamic system environment variables. This keeps your local paths hidden, making your configuration completely safe to use, fork, and share on Git.
+No hardcoded home paths (`C:/Users/name`) or fragile system directories. All configurations use dynamic system environment variables and generic commands (`powershell.exe -NoLogo`). This keeps your local paths hidden, making your configuration completely safe to use, fork, and share on Git.
 
 ---
 

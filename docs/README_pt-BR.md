@@ -23,8 +23,10 @@ Em vez de passar horas ajustando arquivos de configuração JSON, você pode usa
 ### ✨ Destaques
 
 - **Instalação Automatizada:** Execute um único comando (`.\install.ps1`) para copiar as configurações, ajustar caminhos absolutos e configurar o PowerShell.
+- **Suporte a Perfil Duplo:** O instalador detecta e configura automaticamente os perfis do **Windows PowerShell (v5.1)** e do **PowerShell Core (v7+)** de forma simultânea.
+- **Caminho de Documentos Dinâmico:** Sem nomes de usuário ou caminhos de OneDrive fixos. O instalador resolve dinamicamente o diretório ativo de Documentos (suportando redirecionamentos do OneDrive e sistemas em múltiplos idiomas).
 - **Backups Seguros:** O instalador faz backup automático do arquivo original `settings.json` do seu Windows Terminal antes de aplicar os estilos do tema.
-- **Caminhos Dinâmicos e Seguros:** Desenvolvido do zero usando variáveis dinâmicas (`{{ .UserName }}`) e caminhos relativos, evitando o vazamento de caminhos de diretórios locais pessoais.
+- **100% Portável entre Máquinas:** Sem caminhos locais rígidos (`C:/Users/nome`) ou executáveis presos a versões específicas (`WindowsApps`). Funciona perfeitamente em qualquer máquina Windows.
 - **Temas Modulares:** Cada tema inclui prompts do Oh My Posh, configurações do Fastfetch, arte ASCII exclusiva e esquemas de cores para o Windows Terminal.
 
 ---
@@ -33,6 +35,7 @@ Em vez de passar horas ajustando arquivos de configuração JSON, você pode usa
 
 | Tema | Descrição / Detalhes | Detalhes e Visualização |
 |:---|:---|:---|
+| **✨ Clean Stars** | Estética cinza premium e ultra-minimalista, com pílulas flutuantes espaçadas, arte ASCII 3D geométrica, divisores horizontais e ruído visual zero. Extremamente limpo e legível. | [Ver Tema e Screenshots](../themes/MINIMAL/cleanstars/README.md) |
 | **🌸 Zero Two** | Estética marcante em tons de rosa e vermelho inspirada em *Darling in the Franxx*. Inclui monitor de RAM em tempo real, timer de execução e arte ASCII exclusiva. | [Ver Tema e Screenshots](../themes/ANIMES/zerotwo/README.md) |
 | **🐦‍⬛ Itachi** | Estética ultra-premium em vermelho carmesim e preto profundo inspirada em *Naruto*. Possui bordas de linha retrô, cursor em formato de olho Sharingan e arte ASCII do corvo lendário. | [Ver Tema e Screenshots](../themes/ANIMES/itachi/README.md) |
 | **❖ Windows** | Tema premium altamente polido utilizando a vibrante paleta clássica da Microsoft. Contraste perfeito, layouts modernos de powerline e rastreamento de recursos. | [Ver Tema e Screenshots](../themes/OS/windows/README.md) |
@@ -47,7 +50,7 @@ Certifique-se de ter essas ferramentas instaladas antes de rodar o instalador:
 
 1. **[Oh My Posh](https://ohmyposh.dev/docs/installation/windows)** (Motor de prompt)
 2. **[Fastfetch](https://github.com/fastfetch-cli/fastfetch)** (Informações do sistema) — `winget install fastfetch`
-3. **[Nerd Fonts](https://www.nerdfonts.com/)** (Renderização de ícones) — ex: *FiraCode Nerd Font* ou *MesloLGM Nerd Font*
+3. **[Nerd Fonts](https://www.nerdfonts.com/)** (Renderização de ícones) — ex: *JetBrainsMono Nerd Font* ou *FiraCode Nerd Font*
 
 ### 🛠️ Instalação Interativa
 
@@ -91,7 +94,7 @@ Se preferir controle manual completo, aplique os arquivos a partir do diretório
 
 ## 🔒 Segurança e Privacidade
 
-Nada de caminhos locais fixos como `C:/Users/nome`. Todas as configurações utilizam variáveis de ambiente dinâmicas do sistema. Isso mantém seus caminhos privados ocultos, tornando as configurações completamente seguras para uso, fork e compartilhamento no Git.
+Nenhum caminho local rígido (`C:/Users/nome`) ou diretórios de sistema específicos. Todas as configurações utilizam variáveis de ambiente dinâmicas do sistema e comandos genéricos (`powershell.exe -NoLogo`). Isso mantém seus caminhos privados ocultos, tornando as configurações completamente seguras para uso, fork e compartilhamento no Git.
 
 ---
 
