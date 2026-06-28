@@ -36,6 +36,7 @@ Em vez de passar horas ajustando arquivos de configuração JSON, você pode usa
 | Tema | Descrição / Detalhes | Detalhes e Visualização |
 |:---|:---|:---|
 | **✨ Clean Stars** | Estética cinza premium e ultra-minimalista, com pílulas flutuantes espaçadas, arte ASCII 3D geométrica, divisores horizontais e ruído visual zero. Extremamente limpo e legível. | [Ver Tema e Screenshots](../themes/MINIMAL/cleanstars/README.md) |
+| **🐧 Linux** | Tema altamente polido inspirado no console oficial do Ubuntu e no Tux. Possui prompts powerline completos, paleta de cores berinjela escuro oficial (`#300A24`) e logo ASCII do pinguim Tux embutido nativamente no Fastfetch. | [Ver Tema e Screenshots](../themes/OS/linux/README.md) |
 | **🌸 Zero Two** | Estética marcante em tons de rosa e vermelho inspirada em *Darling in the Franxx*. Inclui monitor de RAM em tempo real, timer de execução e arte ASCII exclusiva. | [Ver Tema e Screenshots](../themes/ANIMES/zerotwo/README.md) |
 | **🐦‍⬛ Itachi** | Estética ultra-premium em vermelho carmesim e preto profundo inspirada em *Naruto*. Possui bordas de linha retrô, cursor em formato de olho Sharingan e arte ASCII do corvo lendário. | [Ver Tema e Screenshots](../themes/ANIMES/itachi/README.md) |
 | **❖ Windows** | Tema premium altamente polido utilizando a vibrante paleta clássica da Microsoft. Contraste perfeito, layouts modernos de powerline e rastreamento de recursos. | [Ver Tema e Screenshots](../themes/OS/windows/README.md) |

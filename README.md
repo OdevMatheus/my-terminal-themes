@@ -36,6 +36,7 @@ Instead of spending hours tweaking JSON configurations, you can use the **intell
 | Theme | Preview / Description | Details & Preview |
 |:---|:---|:---|
 | **✨ Clean Stars** | Premium, ultra-minimalist gray theme featuring spacious floating-pill prompts, custom 3D geometric wireframe ASCII art, horizontal dividers, and a tidy layout. | [View Theme & Screenshots](themes/MINIMAL/cleanstars/README.md) |
+| **🐧 Linux** | Highly polished theme inspired by the official Ubuntu terminal and Tux. Features rich powerline prompts, official deep aubergine (`#300A24`) color scheme, and Fastfetch's built-in Tux penguin ASCII art. | [View Theme & Screenshots](themes/OS/linux/README.md) |
 | **🌸 Zero Two** | Ultra-aesthetic pink & red styling inspired by *Darling in the Franxx*. Includes live RAM monitors, execution timers, and exclusive ASCII art. | [View Theme & Screenshots](themes/ANIMES/zerotwo/README.md) |
 | **🐦‍⬛ Itachi** | Ultra-aesthetic, premium crimson & black styling inspired by *Naruto*. Features retro line-borders, custom Sharingan eye input cursor, and legendary crow ASCII art. | [View Theme & Screenshots](themes/ANIMES/itachi/README.md) |
 | **❖ Windows** | Highly polished premium theme utilizing the vibrant classic Microsoft palette. Perfect contrast, modern powerline layouts, and resource tracking. | [View Theme & Screenshots](themes/OS/windows/README.md) |
