@@ -29,7 +29,12 @@ $ThemesRoot    = Join-Path $RepoRoot "themes"
 
 $PoshDestDir   = "$env:USERPROFILE\.config\oh-my-posh"
 $FastfetchDir  = "$env:USERPROFILE\.config\fastfetch"
-$ProfileDest   = "$env:USERPROFILE\OneDrive\Documentos\PowerShell\Microsoft.PowerShell_profile.ps1"
+
+# Obter a pasta Documentos de forma dinamica (suporta OneDrive, local e caminhos em outros idiomas)
+$MyDocuments   = [Environment]::GetFolderPath("MyDocuments")
+$ProfileDestCore = Join-Path $MyDocuments "PowerShell\Microsoft.PowerShell_profile.ps1"
+$ProfileDest51   = Join-Path $MyDocuments "WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+
 $WtSettingsDest = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 
 function Write-Step($msg) {
@@ -115,10 +120,13 @@ function Install-Theme {
     }
 
     if ($Files.Profile) {
-        New-Item -ItemType Directory -Force -Path (Split-Path $ProfileDest) | Out-Null
-        Copy-Item -Path $Files.Profile -Destination $ProfileDest -Force
-        Write-Host "  OK: $ProfileDest" -ForegroundColor Green
-        $installed.Profile = $ProfileDest
+        $profilePaths = @($ProfileDestCore, $ProfileDest51)
+        foreach ($pPath in $profilePaths) {
+            New-Item -ItemType Directory -Force -Path (Split-Path $pPath) | Out-Null
+            Copy-Item -Path $Files.Profile -Destination $pPath -Force
+            Write-Host "  OK: $pPath" -ForegroundColor Green
+        }
+        $installed.ProfilePaths = $profilePaths
     }
 
     if ($Files.WtSettings) {
@@ -147,14 +155,21 @@ function Update-FastfetchSourcePath {
 }
 
 function Update-ProfileOmpPath {
-    param([string]$OmpDest)
+    param(
+        [string]$OmpDest,
+        [string[]]$ProfilePaths
+    )
 
     Write-Step "Ajustando caminho do tema dentro do profile..."
     $forwardPath = $OmpDest -replace '\\', '/'
-    $content = Get-Content $ProfileDest -Raw
-    $content = $content -replace '(--config\s+")[^"]*(")', "`${1}$forwardPath`${2}"
-    Set-Content -Path $ProfileDest -Value $content -NoNewline
-    Write-Host "  OK" -ForegroundColor Green
+    foreach ($pPath in $ProfilePaths) {
+        if (Test-Path $pPath) {
+            $content = Get-Content $pPath -Raw
+            $content = $content -replace '(--config\s+")[^"]*(")', "`${1}$forwardPath`${2}"
+            Set-Content -Path $pPath -Value $content -NoNewline
+            Write-Host "  OK: $pPath" -ForegroundColor Green
+        }
+    }
 }
 
 function Test-Dependencies {
@@ -197,8 +212,8 @@ if ($installed.Config -and $installed.Ascii) {
     Update-FastfetchSourcePath -ConfigDest $installed.Config -AsciiDest $installed.Ascii
 }
 
-if ($installed.Profile) {
-    Update-ProfileOmpPath -OmpDest $installed.Omp
+if ($installed.ProfilePaths) {
+    Update-ProfileOmpPath -OmpDest $installed.Omp -ProfilePaths $installed.ProfilePaths
 }
 
 Test-Dependencies
