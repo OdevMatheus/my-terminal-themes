@@ -105,7 +105,7 @@
         "background": "#55FF55",
         "backgroundImage": null,
         "colorScheme": "IBM 5153",
-        "commandline": "C:\\Program Files\\WindowsApps\\Microsoft.PowerShell_7.6.2.0_x64__8wekyb3d8bbwe\\pwsh.exe",
+        "commandline": "powershell.exe -NoLogo",
         "cursorShape": "emptyBox",
         "font":
         {
@@ -114,7 +114,6 @@
         "foreground": null,
         "guid": "{31e7a814-b4b1-4bef-9b24-30c0ef99a7c9}",
         "hidden": false,
-        "icon": "\ue756C:\\Program Files\\PowerShell\\7\\assets\\PowerShellColor.ico",
         "name": "OdevMatheus",
         "opacity": 15,
         "selectionBackground": null,
